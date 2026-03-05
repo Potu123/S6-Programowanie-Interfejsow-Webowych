@@ -1,2 +1,2 @@
-# S6-Programowanie-Interfejs-w-Webowych
+# S6-Programowanie-Interfejsów-Webowych
 Repozytorium gitowe
