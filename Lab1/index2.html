@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="pl">
 <head>
-    <title> No to klikłeś sobie linkacza </title>
+    <title>No to klikłeś sobie linkacza</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -9,44 +9,47 @@
 <body>
     <header>
         <div class="shop-header-search-div">
-            <input type="text" class="shop-header-search-textInput" />
-            <button class="shop-header-search-lupka-btn" alt="lupka"></button>
+            <input type="text" class="shop-header-search-textInput" aria-label="Wyszukaj w sklepie" />
+            <button class="shop-header-search-lupka-btn" aria-label="Szukaj"></button>
         </div>
-        <a href="koszyk" class="shop-header-koszyk-link"> <img src="images/koszyk.png" class="shop-header-koszyk-img" alt="koszyk" /></a>
-        <button class="shop-header-log_in_out-btn">Zalogój</button>
+        <a href="koszyk" class="shop-header-koszyk-link">
+            <img src="images/koszyk.png" class="shop-header-koszyk-img" alt="Przejdź do koszyka" />
+        </a>
+        <button class="shop-header-log_in_out-btn">Zaloguj</button>
     </header>
+
     <div class="item-middle-div">
         <div class="item-middle-div-div">
-            <img class="item-middle-img" alt="planszówka" />
+            <img class="item-middle-img" alt="Okładka planszówki" />
 
             <table class="item-middle-table">
                 <tbody>
                     <tr>
-                        <td>Liczba graczy</td>
+                        <th scope="row">Liczba graczy</th>
                         <td>w sumie to nie wiadomo</td>
                     </tr>
                     <tr>
-                        <td>Zalecany wiek</td>
+                        <th scope="row">Zalecany wiek</th>
                         <td>ojoj, dużo</td>
                     </tr>
                     <tr>
-                        <td>Czas zabawy</td>
+                        <th scope="row">Czas zabawy</th>
                         <td>zależy</td>
                     </tr>
                     <tr>
-                        <td>Projektant</td>
+                        <th scope="row">Projektant</th>
                         <td>To jest wspaniały człowiek</td>
                     </tr>
                     <tr>
-                        <td>Wydanie</td>
+                        <th scope="row">Wydanie</th>
                         <td>oczywiście, że nasz znakomity kraj</td>
                     </tr>
                     <tr>
-                        <td>Instrukcja</td>
+                        <th scope="row">Instrukcja</th>
                         <td>nom... chyba po polsku</td>
                     </tr>
                     <tr>
-                        <td>Złożoność</td>
+                        <th scope="row">Złożoność</th>
                         <td>początkujący sie troche zastanowi i jakoś pójdzie</td>
                     </tr>
                 </tbody>
@@ -61,12 +64,9 @@
 
     </div>
 
-
-
     <footer>
         <p>stopka sobie stopa</p>
     </footer>
-
 
 </body>
 </html>
