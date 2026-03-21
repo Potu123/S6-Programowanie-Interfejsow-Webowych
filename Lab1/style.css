@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --item-img-height: 100px;
     --icon-size: 40px;
     --header-height: 10vh;
@@ -7,8 +7,8 @@
     --bg-color: #f4f4f9;
     --header-color: #2c3e50;
     --text-color: #333333;
-    --accent-color: #3498db;
-    --accent-hover-color: #2980b9;
+    --accent-color: #2980b9;
+    --accent-hover-color: #1a5276;
     --border-color: #dddddd;
 }
 
@@ -65,6 +65,11 @@ header {
     outline: none;
     padding-left: 10px;
     font-size: 16px;
+    border-radius: 3px;
+}
+
+.shop-header-search-textInput:focus {
+    outline: 2px solid var(--accent-color);
 }
 
 .shop-header-koszyk-link {
@@ -227,10 +232,18 @@ table {
     margin-top: 20px;
 }
 
-td {
+th, td {
     border: 1px solid var(--border-color);
-    text-align: center;
     padding: 10px;
+}
+
+th {
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+td {
+    text-align: center;
 }
 
 .item-middle-h2 {
