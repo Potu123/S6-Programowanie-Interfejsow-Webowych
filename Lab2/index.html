@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>    
+    <title>Lista ToDo</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <div class="lista-header-add-div">
+            <label class="lista-header-add-label">dodawanie</label>
+            <input type="text" id="lista-header-add-textInput" aria-label="dodaj rzecz" />
+            <button onclick="dodajElement()" id="lista-header-add-btn" aria-label="dodaj">dodaj</button>
+        </div>
+    </header>
+
+    <div class="lista-middle-div">
+        <ul id="lista-middle-div-ul">
+            <li class="lista-middle-div-item">
+                <span class="lista-middle-div-item-text">Wielki potęrzny element który potęrznie przebywa w liście potężnych elementów</span>
+                <button onclick="usun(this)" class="lista-middle-div-ul-item-deleteBTN">X</button>
+            </li>
+            <li class="lista-middle-div-item">
+                <span class="lista-middle-div-item-text">Wielki potęrzny element który potęrznie przebywa w liście potężnych elementów</span>
+                <button onclick="usun(this)" class="lista-middle-div-ul-item-deleteBTN">X</button>
+            </li>
+            <li class="lista-middle-div-item">
+                <span class="lista-middle-div-item-text">Wielki potęrzny element który potęrznie przebywa w liście potężnych elementów</span>
+                <button onclick="usun(this)" class="lista-middle-div-ul-item-deleteBTN">X</button>
+            </li>
+        </ul>
+        <div id="kosz">
+            <h2>Kosz</h2>
+        </div>
+
+        <dialog id="deleteItem-modal">
+            <h3 id="modal-h3"></h3>
+
+            <form method="dialog" class="modal-form">
+                <button type="submit" value="flase" class="modal-btn">Tak</button>
+                <button type="submit" value="true" class="modal-btn">anuluj</button>
+            </form>
+        </dialog>
+
+    </div>
+
+
+
+    <footer>
+        <p>stopka sobie stopa</p>
+    </footer>
+    <script src="./script.js"></script>
+</body>
+</html>
