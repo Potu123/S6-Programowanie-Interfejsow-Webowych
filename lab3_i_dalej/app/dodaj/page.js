@@ -1,30 +1,61 @@
-// Import komponentu Link do nawigacji wewnątrz Next.js
-import Link from 'next/link';
+// app/dodaj/page.js
 
-// Główna funkcja komponentu strony dodawania nowej gry
+"use client";
+
+import Link from 'next/link';
+import { useContext } from 'react';
+import { useRouter } from 'next/navigation';
+import GamesContext from '../_Contexts/GamesContext'; 
+import { AuthContext } from '../_Contexts/AuthContext';
+
 export default function AddGamePage() {
+  const { addGame } = useContext(GamesContext);
+  const { user } = useContext(AuthContext); // Dane zalogowanego użytkownika
+  const router = useRouter();
+
+  // Obsługa wysyłki formularza
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Weryfikacja autoryzacji
+    if (!user) {
+      alert("Musisz być zalogowany, aby dodać nową grę!");
+      return;
+    }
+    
+    // Pobranie danych z pól formularza
+    const formData = new FormData(e.target);
+    
+    // Obiekt nowej pozycji gier
+    const newGame = {
+      title: formData.get('title'),
+      description: [formData.get('description')], 
+      min_players: parseInt(formData.get('min_players'), 10),
+      max_players: parseInt(formData.get('max_players'), 10),
+      avg_play_time_minutes: parseInt(formData.get('avg_play_time_minutes'), 10),
+      publisher: formData.get('publisher'),
+      type: formData.get('type'),
+      is_expansion: formData.get('is_expansion') === 'true',
+      price_pln: parseFloat(formData.get('price_pln')),
+      CzyjaGra: user.email // Przypisanie adresu email autora
+    };
+
+    // Zapis w kontekście aplikacji
+    addGame(newGame);
+    
+    // Przekierowanie do strony głównej
+    router.push('/');
+  };
+
   return (
     <>
-      <header>
-        <div className="shop-header-search-div">
-          <input type="text" className="shop-header-search-textInput" aria-label="Wyszukaj w sklepie" />
-          <button className="shop-header-search-lupka-btn" aria-label="Szukaj"></button>
-        </div>
-        
-        <Link href="/koszyk" className="shop-header-koszyk-link">
-          <img src="/images/koszyk.png" className="shop-header-koszyk-img" alt="Przejdź do koszyka" />
-        </Link>
-        
-        <button className="shop-header-log_in_out-btn">Log in</button>
-      </header>
-
       <div className="item-middle-div">
         <div className="item-middle-description-div">
           <h2 className="item-middle-h2">Dodaj nową grę</h2>
         </div>
 
         <div className="item-middle-div-div">
-          <form action="/" className="item-middle-table">
+          <form onSubmit={handleSubmit} className="item-middle-table">
             
             <label><strong>Tytuł:</strong><br/>
               <input type="text" name="title" required />
@@ -77,10 +108,6 @@ export default function AddGamePage() {
           </form>
         </div>
       </div>
-
-      <footer>
-        <p>stopka sobie stopa</p>
-      </footer>
     </>
   );
 }

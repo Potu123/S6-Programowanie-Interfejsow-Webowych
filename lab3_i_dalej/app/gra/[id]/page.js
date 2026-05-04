@@ -1,19 +1,25 @@
-// app/gra/[id]/page.tsx
-import Link from 'next/link';
-// Import komponentu galerii obrazów
+// app/gra/page.js
+"use client";
+
+import { useContext } from 'react';
+import { useParams } from 'next/navigation';
+import GamesContext from '../../_Contexts/GamesContext'; 
 import ImageGallery from './ImageGallery'; 
 
-// Główny komponent strony szczegółów gry
-export default async function GamePage({ params }: { params: Promise<{ id: string }> }) {
-  // Pobranie identyfikatora gry z parametrów ścieżki
-  const { id } = await params;
-  const response = await fetch('https://szandala.github.io/piwo-api/board-games.json');
-  // Konwersja odpowiedzi na format JSON
-  const data = await response.json();
-  // Wyszukanie konkretnego obiektu gry na podstawie ID
-  const game = data.board_games?.find((g: any) => g.id.toString() === id);
+export default function GamePage() {
+  // Pobranie ID gry z parametrów URL
+  const { id } = useParams();
+  
+  // Dostęp do kontekstu gier
+  const { games, isLoading } = useContext(GamesContext);
 
-  // Obsługa przypadku braku gry w bazie danych
+  // Obsługa stanu ładowania
+  if (isLoading) return <div>Ładowanie danych...</div>;
+
+  // Wyszukiwanie obiektu gry po ID
+  const game = games?.find((g) => g.id.toString() === id);
+
+  // Reakcja na brak danych o grze
   if (!game) return <div>Nie znaleziono gry</div>;
 
   return (
@@ -75,7 +81,7 @@ export default async function GamePage({ params }: { params: Promise<{ id: strin
 
         <div className="item-middle-description-div">
           <h2 className="item-middle-h2">{game.title}</h2>
-          <p>{game.description.join(' ')}</p>
+          <p>{game.description?.join(' ')}</p>
         </div>
       </div>
     </>

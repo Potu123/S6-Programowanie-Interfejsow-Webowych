@@ -1,3 +1,5 @@
+/* app/globals.css */
+
 :root {
     --item-img-height: 100px;
     --icon-size: 40px;
@@ -40,6 +42,12 @@ header {
     justify-content: space-evenly;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.loadingIMG{
+    width:60%;
+    height:70vh;
+    margin:auto;
 }
 
 .shop-header-search-div {
@@ -86,7 +94,7 @@ header {
 }
 
 .shop-header-log_in_out-btn {
-    width: 10%;
+    padding: 0 20px;
     height: var(--icon-size);
     background-color: var(--accent-color);
     color: white;
@@ -95,6 +103,8 @@ header {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
 }
 
 .shop-header-log_in_out-btn:hover {
@@ -177,6 +187,33 @@ header {
 
 .shop-middle-content-item-editBtn:hover {
     background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.shop-middle-content-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.shop-middle-content-item-deleteBtn {
+    background-color: transparent;
+    color: #e74c3c; 
+    border: 2px solid #e74c3c;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: auto;
+    width: 100%;
+}
+
+.shop-middle-content-item-deleteBtn:hover {
+    background-color: #e74c3c;
     color: white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -462,6 +499,107 @@ td {
     background-color: var(--accent-hover-color);
 }
 
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Zajmuje całą dostępną przestrzeń między headerem a footerem */
+    padding: 40px 20px;
+}
+
+.login-section {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Odstępy między elementami */
+}
+
+.login-header {
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.login-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    transition: outline 0.2s;
+}
+
+.login-input:focus {
+    outline: 2px solid var(--accent-color);
+    border-color: transparent;
+}
+
+.login-btn {
+    width: 100%;
+    height: 45px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.login-btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+.google-btn {
+    background-color: white;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    margin-top: 0;
+}
+
+.google-btn:hover {
+    background-color: #f9f9f9;
+}
+
+.login-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 10px 0;
+}
+
+.login-footer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+.login-link {
+    color: var(--accent-color);
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.login-link:hover {
+    color: var(--accent-hover-color);
+    text-decoration: underline;
+}
 
 @media (max-width: 768px) {
     :root {

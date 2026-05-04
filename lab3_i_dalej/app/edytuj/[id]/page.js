@@ -1,51 +1,68 @@
-// Import komponentu Link do nawigacji wewnątrz aplikacji
+// app/edytuj/page.js
+"use client";
+
+import { useContext } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import GamesContext from '../../_Contexts/GamesContext';
 
-// Definicja asynchronicznego komponentu strony edycji gry
-export default async function EditGamePage({ params }: { params: Promise<{ id: string }> }) {
-  // Pobranie identyfikatora gry z parametrów ścieżki
-  const { id } = await params;
+export default function EditGamePage() {
+  const { id } = useParams();
+  const router = useRouter(); // Inicjalizacja routera
 
-  const response = await fetch('https://szandala.github.io/piwo-api/board-games.json');
-  const data = await response.json();
+  // Pobranie danych i funkcji z kontekstu
+  const { games, isLoading, editGame } = useContext(GamesContext);
   
-  // Wyszukanie konkretnej gry na podstawie otrzymanego ID
-  const game = data.board_games?.find((g: any) => g.id.toString() === id);
+  if (isLoading) return <div>Ładowanie danych...</div>;
 
-  // Obsługa przypadku braku gry w bazie danych
+  const game = games?.find((g) => g.id.toString() === id);
+
   if (!game) return <div>Nie znaleziono gry do edycji</div>;
+
+  // Obsługa wysyłania formularza edycji
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    
+    const updatedData = {
+      title: formData.get('title'),
+      // Konwersja opisu na tablicę linii
+      description: formData.get('description').split('\n').filter(line => line.trim() !== ''),
+      min_players: parseInt(formData.get('min_players'), 10),
+      max_players: parseInt(formData.get('max_players'), 10),
+      avg_play_time_minutes: parseInt(formData.get('avg_play_time_minutes'), 10),
+      publisher: formData.get('publisher'),
+      type: formData.get('type'),
+      is_expansion: formData.get('is_expansion') === 'true',
+      price_pln: parseFloat(formData.get('price_pln'))
+    };
+
+    // Parsowanie ID i aktualizacja danych w kontekście
+    const gameId = isNaN(id) ? id : parseInt(id, 10); 
+    editGame(gameId, updatedData);
+    
+    // Przekierowanie do strony głównej
+    router.push('/');
+  };
 
   return (
     <>
-      <header>
-        <div className="shop-header-search-div">
-          <input type="text" className="shop-header-search-textInput" aria-label="Wyszukaj w sklepie" />
-          <button className="shop-header-search-lupka-btn" aria-label="Szukaj"></button>
-        </div>
-        
-        <Link href="/koszyk" className="shop-header-koszyk-link">
-          <img src="/images/koszyk.png" className="shop-header-koszyk-img" alt="Przejdź do koszyka" />
-        </Link>
-        
-        <button className="shop-header-log_in_out-btn">Log in</button>
-      </header>
-
-      {/* Główna sekcja zawartości strony */}
       <div className="item-middle-div">
         <div className="item-middle-description-div">
           <h2 className="item-middle-h2">Edycja gry: {game.title}</h2>
         </div>
-
+          <p>cos</p>
         <div className="item-middle-div-div">
-          <form action="/" className="item-middle-table">
+          {/* Formularz edycji danych gry */}
+          <form onSubmit={handleSubmit} className="item-middle-table">
             
-            {/* Pole edycji tytułu gry */}
             <label className="item-middle-form-label"><strong>Tytuł:</strong><br/>
               <input type="text" name="title" defaultValue={game.title} className="item-middle-input item-middle-input-full" />
             </label>
 
             <label className="item-middle-form-label"><strong>Opis:</strong><br/>
-              <textarea name="description" defaultValue={game.description.join('\n')} rows={5} className="item-middle-textarea" />
+              <textarea name="description" defaultValue={game.description?.join('\n')} rows={5} className="item-middle-textarea" />
             </label>
 
             <div className="item-middle-form-row">
@@ -91,11 +108,6 @@ export default async function EditGamePage({ params }: { params: Promise<{ id: s
           </form>
         </div>
       </div>
-
-      {/* Sekcja stopki strony */}
-      <footer>
-        <p>stopka sobie stopa</p>
-      </footer>
     </>
   );
 }
