@@ -1,3 +1,4 @@
+// app/_contexts/AuthContext.js
 "use client";
 
 import { createContext, useEffect, useState } from "react";
@@ -13,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false); // Przestajemy ładować, gdy Firebase odda nam stan
+      setLoading(false);
     });
 
     return () => unsubscribe();

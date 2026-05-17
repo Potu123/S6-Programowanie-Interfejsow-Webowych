@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "app/gra/[id]/ImageGallery.js", "app/gra/[id]/page.js", "app/edytuj/[id]/page.js", "app/dodaj/page.js", "app/layout.js", "app/layout.js", "app/page.js"  ],
   "exclude": ["node_modules"]
 }

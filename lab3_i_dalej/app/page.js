@@ -6,8 +6,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import GamesContext from "./_Contexts/GamesContext";
 import { AuthContext } from "./_Contexts/AuthContext";
+import { useKoszyk } from "./_Contexts/KoszykContext";
 
 export default function HomePage() {
+  const { addToKoszyk, isInKoszyk } = useKoszyk();
   const { games, isLoading, deleteGame, editGame, toggleWyszarzenie } = useContext(GamesContext);
   const { user } = useContext(AuthContext);
   
@@ -93,23 +95,28 @@ export default function HomePage() {
                   )}
 
                   {!isGrayedOut && (
-                    <button 
-                      className="shop-middle-content-item-buyBtn"
-                      style={{ 
-                          backgroundColor: '#28a745', 
-                          color: 'white', 
-                          border: 'none', 
-                          padding: '5px 10px', 
-                          cursor: 'pointer', 
-                          borderRadius: '4px'
-                      }}
-                      onClick={(e) => {
-                          e.preventDefault();
-                          editGame(game.id, { czyWyszarzone: true });
-                      }}
-                    >
-                      Kup teraz
-                    </button>
+                    <div className="shop-middle-content-item-actions">
+                      <button 
+                        className="shop-middle-content-item-buyBtn"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            editGame(game.id, { czyWyszarzone: true });
+                        }}
+                      >
+                        Kup teraz
+                      </button>
+
+                      <button 
+                        className="shop-middle-content-item-cartBtn"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            addToKoszyk(game);
+                            alert(`Dodano do koszyka!`); 
+                        }}
+                      >
+                        Do koszyka
+                      </button>
+                    </div>
                   )}
                 </div>
 

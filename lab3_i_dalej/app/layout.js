@@ -5,6 +5,7 @@ import { AuthProvider } from "./_Contexts/AuthContext";
 import AuthButton from "./_components/AuthButton";
 import "./globals.css";
 import Link from 'next/link';
+import { KoszykProvider } from "./_Contexts/KoszykContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
               Strona główna
             </Link>
             
-            <Link href="/koszyk" className="shop-header-koszyk-link">
+            <Link href="/Koszyk" className="shop-header-koszyk-link">
               <img src="/../images/koszyk.png" className="shop-header-koszyk-img" alt="Przejdź do koszyka" />
             </Link>
 
@@ -48,7 +49,9 @@ export default function RootLayout({ children }) {
           </header>
 
           <GamesProvider>
+            <KoszykProvider>
             {children}
+            </KoszykProvider>
           </GamesProvider>
 
           <footer>
